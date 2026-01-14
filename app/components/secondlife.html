@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secondlife Retrogame - Modern Retro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- Variabili CSS per la palette colori --- */
+        :root {
+            --primary-yellow: #FFD700; /* Oro dal logo */
+            --primary-red: #E60000;    /* Rosso dal logo */
+            --bg-dark: #121212;        /* Sfondo principale scuro */
+            --bg-card: #1E1E1E;        /* Sfondo delle card leggermente più chiaro */
+            --text-light: #FFFFFF;     /* Testo bianco */
+            --text-gray: #B0B0B0;      /* Testo secondario grigio */
+            
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+            
+            --neon-glow: 0 0 15px rgba(230, 0, 0, 0.6); /* Effetto neon rosso */
+        }
+
+        /* --- Reset e Stili Base --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- HEADER --- */
+        .site-header {
+            background-color: rgba(18, 18, 18, 0.95); /* Leggermente trasparente */
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--primary-red);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Il tuo logo originale */
+        .logo-img {
+            height: 50px; /* Regola l'altezza secondo necessità */
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); /* Leggero bagliore giallo al logo */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-yellow);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--primary-yellow);
+        }
+        
+        .header-icons svg {
+            cursor: pointer;
+            transition: transform 0.3s, filter 0.3s;
+        }
+        
+        .header-icons svg:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px var(--primary-yellow));
+        }
+
+        /* --- HERO SECTION (Banner Principale) --- */
+        .hero {
+            /* Sfondo scuro con una sfumatura rossa moderna. SOSTITUISCI l'URL con la tua immagine di console */
+            background: linear-gradient(to right, rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.4)), 
+                        url('https://via.placeholder.com/1600x900/330000/FFFFFF?text=Sfondo+Console+Retro+Moderne');
+            background-size: cover;
+            background-position: center;
+            padding: 8rem 0;
+            display: flex;
+            align-items: center;
+            min-height: 60vh;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        h1.hero-title {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+        
+        /* Evidenziamo alcune parole con i colori del brand */
+        .highlight-red { color: var(--primary-red); text-shadow: 0 0 10px rgba(230, 0, 0, 0.4);}
+        .highlight-yellow { color: var(--primary-yellow); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+
+        .btn-cta {
+            display: inline-block;
+            background-color: var(--primary-red);
+            color: var(--primary-yellow);
+            font-family: var(--font-heading);
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 1rem 2.5rem;
+            border-radius: 50px; /* Bordi arrotondati moderni */
+            font-size: 1.2rem;
+            box-shadow: var(--neon-glow);
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-red);
+        }
+
+        .btn-cta:hover {
+            background-color: transparent;
+            color: var(--primary-red);
+            box-shadow: 0 0 25px rgba(230, 0, 0, 0.8);
+            transform: translateY(-3px);
+        }
+
+        /* --- SEZIONE ULTIMI ARRIVI --- */
+        .latest-arrivals {
+            padding: 5rem 0;
+            /* Sfondo leggermente diverso per staccare */
+            background: radial-gradient(circle at top right, #2a0a0a, var(--bg-dark));
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* Linea decorativa sotto il titolo */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-red);
+            box-shadow: var(--neon-glow);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* --- Product Card Moderna --- */
+        .product-card {
+            background-color: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-red);
+            box-shadow: var(--neon-glow);
+        }
+
+        .product-image-container {
+            padding: 1.5rem;
+            background-color: #252525;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 220px;
+        }
+
+        .product-image-container img {
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover .product-image-container img {
+             transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .product-title {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-platform {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .product-price {
+            display: block;
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--primary-yellow);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-add-cart {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 30px;
+            background-color: var(--primary-red);
+            color: var(--primary-yellow);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-add-cart:hover {
+            background-color: var(--primary-yellow);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px var(--primary-yellow);
+        }
+        
+        /* Footer semplice per completezza */
+        footer {
+            background: #0a0a0a;
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            border-top: 2px solid var(--primary-red);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; gap: 1rem; }
+            .nav-links { gap: 1rem; }
+            h1.hero-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="#">
+                <img src="https://secondliferetrogame.com/wp-content/uploads/2021/05/Lofo_secondlife-1-removebg.png" alt="Secondlife Retrogame Logo" class="logo-img">
+            </a>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Chi Siamo</a></li>
+                    <li><a href="#">Contatti</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-icons">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Il tuo <span class="highlight-red">nuovo</span><br>
+                        vecchio gioco<br>
+                        <span class="highlight-yellow">preferito</span>
+                    </h1>
+                    <a href="#" class="btn-cta">Inizia l'avventura</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="latest-arrivals">
+            <div class="container">
+                <h2 class="section-title">Ultimi Arrivi</h2>
+                
+                <div class="product-grid">
+                    <article class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://via.placeholder.com/300x300/1E1E1E/FFFFFF?text=Zelda+SNES" alt="Zelda SNES">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">The Legend of Zelda: A Link to the Past</h3>
+                            <span class="product-platform">SNES - Loose</span>
+                            <span class="product-price">€ 59,00</span>
+                            <button class="btn-add-cart">Aggiungi al carrello</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image-container">
+                             <img src="https://via.placeholder.com/300x300/1E1E1E/FFFFFF?text=PlayStation+1" alt="PlayStation 1 Console">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Sony PlayStation 1 (PSX)</h3>
+                            <span class="product-platform">Console - Boxata</span>
+                            <span class="product-price">€ 120,00</span>
+                            <button class="btn-add-cart">Aggiungi al carrello</button>
+                        </div>
+                    </article>
+
+                     <article class="product-card">
+                        <div class="product-image-container">
+                             <img src="https://via.placeholder.com/300x300/1E1E1E/FFFFFF?text=Pokemon+Rosso" alt="Pokemon Rosso GameBoy">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Pokémon Versione Rossa</h3>
+                            <span class="product-platform">Game Boy - Loose</span>
+                            <span class="product-price">€ 75,00</span>
+                            <button class="btn-add-cart">Aggiungi al carrello</button>
+                        </div>
+                    </article>
+                    
+                    <article class="product-card">
+                        <div class="product-image-container">
+                             <img src="https://via.placeholder.com/300x300/1E1E1E/FFFFFF?text=Metal+Gear+Solid" alt="Metal Gear Solid PS1">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Metal Gear Solid</h3>
+                            <span class="product-platform">PS1 - Completo</span>
+                            <span class="product-price">€ 45,00</span>
+                            <button class="btn-add-cart">Aggiungi al carrello</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 Secondlife Retrogame - Refactoring Concept</p>
+        </div>
+    </footer>
+
+</body>
+</html>
