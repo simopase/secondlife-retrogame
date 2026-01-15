@@ -1,5 +1,6 @@
 'use client'
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Button from './Button';
 import 'swiper/css';
 
 type Slide = {
@@ -35,7 +36,7 @@ const SwiperComponent = ({ slides }: SwiperProps) => {
                   ))
                 }
               </h1>
-              <div>{slide.bottomText}</div>
+              <Button className="mt-6" size="l" type="primary-glow" onClick={()=> console.log("clicked")}>{slide.bottomText}</Button>
             </div>
 
           </div>

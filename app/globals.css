@@ -6,6 +6,7 @@
   --sidebar-text: #898989;
   --primary-red: #E60000;
   --primary-yellow: #FFD700;
+  --cta-shadow: 0 0 15px rgba(230, 0, 0, 0.6)
 
 
 }
@@ -16,6 +17,7 @@
   --color-sidebar: var(--sidebar-text);
   --color-primary-red: var(--primary-red);
   --color-primary-yellow: var(--primary-yellow);
+  --cta-shadow: var(--cta-shadow);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -36,3 +38,18 @@ body {
     @apply text-white uppercase font-black text-6xl leading-tight;
   }
 }
+
+@layer components {
+  .title-retro {
+    @apply relative text-4xl font-black mb-10 uppercase;
+  }
+
+  /* Nota: per i pseudo-elementi complessi con valori arbitrari (le parentesi quadre),
+     spesso è meglio usare CSS standard qui dentro invece di @apply */
+  .title-retro::after {
+    content: '';
+    @apply absolute left-0 w-[60px] h-[4px] bg-[#E60000] shadow-[0_0_15px_rgba(230,0,0,0.6)];
+    bottom: -10px;
+  }
+}
+

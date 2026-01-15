@@ -1,30 +1,15 @@
 import Navbar from "./components/Navbar";
 import { ShoppingCart, User } from 'lucide-react';
-import SwiperComponent from "./components/Swiper";
+import SwiperComponent from "./components/SwiperComponent";
+import CatalogueComponent from "./components/CatalogueComponent";
+import { slides, catalogue } from "./lib/db";
+import Footer from "./components/Footer";
 
-const slides = [
-  {
-    title: {
-      text: "Il tuo nuovo vecchio gioco preferito",
-      primaryWord: "nuovo",
-      secondaryWord: "preferito"
-    },
-    image: "slider/slide1.jpg",
-    bottomText: "This is slide 1"
-  },
-  {
-    title: {
-      text: "Il tuo nuovo vecchio gioco preferito"
-    },
-    image: "slider/slide2.jpg",
-    bottomText: "This is slide 2"
-  },
-]
 
 export default function Home() {
   return <>
-    <div className="border-b-2 border-primary-red">
-      <Navbar className="container mx-auto flex justify-between items-center">
+    <div className="border-b-2 border-primary-red sticky top-0 z-50 bg-[rgba(18,18,18,0.95)]">
+      <Navbar className="container mx-auto flex justify-between items-center ">
         <ul className="font-monserrat text-lg uppercase font-bold">
           <li className="inline-block mx-4">Shop</li>
           <li className="inline-block mx-4">Chi siamo</li>
@@ -37,6 +22,8 @@ export default function Home() {
       </Navbar>
     </div>
     <SwiperComponent slides={slides} />
+    <CatalogueComponent catalogue={catalogue} />
+    <Footer />
   </>
 
 }

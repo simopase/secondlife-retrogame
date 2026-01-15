@@ -1,7 +1,9 @@
 export default function Footer() {
     return <>
-    <div className="footer">
-        <p>© 2024 My Company. All rights reserved.</p>
-    </div>
+        <footer className="border-t-2 border-primary-red p-4">
+            <div className="container mx-auto text-center text-sm text-gray-500">
+                <p>© 2026 Secondlife Retrogame</p>
+            </div>
+        </footer>
     </>
 }
