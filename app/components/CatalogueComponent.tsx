@@ -1,4 +1,4 @@
-import Card from "./Card";
+import ProductCard from "./ProductCard";
 
 export type Card = {
     title: string;
@@ -22,7 +22,7 @@ const CatalogueComponent = ({ catalogue }: CatalogueProps) => {
             <h2 className="text-4xl font-black mb-10 uppercase title-retro">Ultimi Arrivi</h2>
             <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-10">
                 {catalogue.map((card, index) => (
-                    <Card key={index} card={card} />
+                    <ProductCard key={index} card={card} />
                 ))}
             </div>
         </div>

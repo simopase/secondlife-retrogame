@@ -5,7 +5,7 @@ type CardProps = {
     card: CardType;
 }
 
-const Card = ({ card }: CardProps) => {
+const ProductCard = ({ card }: CardProps) => {
     
     return (
         <div className="group relative flex flex-col bg-[#1E1E1E] rounded-[15px] overflow-hidden border border-transparent transition-all duration-300 hover:-translate-y-2 hover:border-primary-red hover:shadow-[0_0_15px_rgba(230,0,0,0.6)]">
@@ -34,4 +34,4 @@ const Card = ({ card }: CardProps) => {
     );
 };
 
-export default Card;
+export default ProductCard;
