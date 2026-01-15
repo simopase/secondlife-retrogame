@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secondlife Retrogame - Level Up Your Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CONFIGURAZIONE VARIABILI --- */
+        :root {
+            --color-gold: #FFD700;
+            --color-red: #FF003C; /* Rosso più "Cyber" */
+            --color-dark: #050505;
+            --color-panel: #111111;
+            --color-text: #E0E0E0;
+            
+            --font-pixel: 'Press Start 2P', cursive;
+            --font-tech: 'Rajdhani', sans-serif;
+            
+            --glow-red: 0 0 10px rgba(255, 0, 60, 0.7), 0 0 20px rgba(255, 0, 60, 0.5);
+            --glow-gold: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* --- RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--color-dark);
+            color: var(--color-text);
+            font-family: var(--font-tech);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- EFFETTO CRT SCANLINE (Overlay Monitor Vecchio) --- */
+        .crt::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 999;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* --- HEADER FUTURISTICO --- */
+        .site-header {
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 0, 60, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-family: var(--font-pixel);
+            font-size: 1rem;
+            color: var(--color-gold);
+            text-shadow: 2px 2px 0px var(--color-red);
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-red);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--color-red);
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--color-gold); text-shadow: var(--glow-gold); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(circle at center, #1a0505 0%, #000000 100%);
+            overflow: hidden;
+        }
+
+        /* Griglia retro nel background */
+        .hero-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            bottom: 0;
+            background-image: 
+                linear-gradient(var(--color-panel) 1px, transparent 1px),
+                linear-gradient(90deg, var(--color-panel) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg) translateY(100px) scale(2);
+            opacity: 0.3;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 1000px; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+        }
+
+        /* Effetto Glitch sul titolo */
+        h1.hero-title {
+            font-size: 5rem;
+            line-height: 0.9;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            color: #fff;
+            position: relative;
+        }
+
+        .hero-title span.red { color: var(--color-red); text-shadow: var(--glow-red); }
+        .hero-title span.gold { color: var(--color-gold); text-shadow: var(--glow-gold); }
+
+        .btn-start {
+            background: var(--color-red);
+            color: #fff;
+            font-family: var(--font-pixel);
+            font-size: 0.8rem;
+            padding: 1.5rem 3rem;
+            border: none;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 5px 5px 0px var(--color-gold);
+            margin-top: 1rem;
+            display: inline-block;
+        }
+
+        .btn-start:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--color-gold);
+            filter: brightness(1.2);
+        }
+
+        /* --- MARQUEE STRIP (Striscia scorrevole) --- */
+        .marquee-strip {
+            background: var(--color-gold);
+            color: var(--color-dark);
+            padding: 0.8rem 0;
+            font-family: var(--font-pixel);
+            font-size: 0.8rem;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- PRODUCTS SECTION --- */
+        .latest-arrivals {
+            padding: 6rem 0;
+            background: #080808;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .view-all {
+            font-family: var(--font-pixel);
+            font-size: 0.7rem;
+            color: var(--color-red);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        /* --- NEW CARD DESIGN --- */
+        .game-card {
+            background: linear-gradient(145deg, #151515, #0a0a0a);
+            border: 1px solid #333;
+            position: relative;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 1rem;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 1px solid transparent;
+            background: linear-gradient(45deg, var(--color-red), transparent, var(--color-gold)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+        }
+
+        .game-card:hover::before { opacity: 1; }
+
+        .card-image {
+            height: 250px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid var(--color-red);
+        }
+        
+        .card-image img {
+            transition: 0.5s;
+            filter: grayscale(0.6);
+        }
+
+        .game-card:hover .card-image img {
+            filter: grayscale(0);
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        .card-details {
+            padding-top: 1.5rem;
+        }
+
+        .badge {
+            background: #333;
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .game-title {
+            font-size: 1.4rem;
+            margin: 0.5rem 0;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: var(--color-gold);
+            font-family: var(--font-pixel);
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn-buy-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-red);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .btn-buy-icon:hover {
+            background: var(--color-gold);
+            color: #000;
+            box-shadow: 0 0 15px var(--color-gold);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 4px solid var(--color-red);
+            background: #000;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: var(--font-pixel);
+            color: #555;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* Mobile */
+        @media(max-width: 768px) {
+            h1.hero-title { font-size: 3rem; }
+            .header-content { flex-direction: column; gap: 1rem; }
+            .nav-links { gap: 1.5rem; }
+        }
+
+    </style>
+</head>
+<body class="crt">
+
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="#" class="logo-text">
+                // SECONDLIFE_RETROGAME
+            </a>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Console</a></li>
+                    <li><a href="#">Trade-In</a></li>
+                </ul>
+            </nav>
+
+            <div style="display:flex; gap:1rem; color:white;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-grid"></div>
+            <div class="container hero-content">
+                <div style="color: var(--color-gold); font-family: var(--font-pixel); font-size: 0.8rem; margin-bottom: 1rem;">
+                    ★ PRESS START TO PLAY
+                </div>
+                <h1 class="hero-title">
+                    Give Games<br>
+                    A <span class="gold">Second</span><br>
+                    <span class="red">Life</span>.
+                </h1>
+                <p style="font-size: 1.2rem; max-width: 500px; color: #aaa; margin-bottom: 2rem;">
+                    Il miglior marketplace italiano per collezionisti. Compra, vendi e scambia retrogames garantiti e testati.
+                </p>
+                <a href="#" class="btn-start">ENTER SHOP ></a>
+            </div>
+        </section>
+
+        <div class="marquee-strip">
+            <div class="marquee-content">
+                NEW ARRIVALS • PLAYSTATION 1 • NINTENDO 64 • SEGA MEGA DRIVE • GAMEBOY COLOR • RARE IMPORTS • NEW ARRIVALS • PLAYSTATION 1 • NINTENDO 64 • SEGA MEGA DRIVE •
+            </div>
+        </div>
+
+        <section class="latest-arrivals">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Fresh <span style="color:var(--color-red)">Drops</span></h2>
+                    <a href="#" class="view-all">VIEW ALL INVENTORY -></a>
+                </div>
+                
+                <div class="product-grid">
+                    <article class="game-card">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/300x300/000000/FFFFFF?text=ZELDA+BOX" alt="Zelda">
+                        </div>
+                        <div class="card-details">
+                            <span class="badge">SNES / RARE</span>
+                            <h3 class="game-title">Zelda: Link to the Past</h3>
+                            <div class="price-row">
+                                <span class="price">€59</span>
+                                <button class="btn-buy-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/300x300/000000/FFFFFF?text=PS1+CONSOLE" alt="PS1">
+                        </div>
+                        <div class="card-details">
+                            <span class="badge" style="color: #6a00ff;">Hardware</span>
+                            <h3 class="game-title">Sony PlayStation 1</h3>
+                            <div class="price-row">
+                                <span class="price">€120</span>
+                                <button class="btn-buy-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/300x300/000000/FFFFFF?text=POKEMON+RED" alt="Pokemon">
+                        </div>
+                        <div class="card-details">
+                            <span class="badge" style="color: var(--color-red);">GameBoy</span>
+                            <h3 class="game-title">Pokémon Red Version</h3>
+                            <div class="price-row">
+                                <span class="price">€75</span>
+                                <button class="btn-buy-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                     <article class="game-card">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/300x300/000000/FFFFFF?text=SEGA+CONTROLLER" alt="Sega">
+                        </div>
+                        <div class="card-details">
+                            <span class="badge" style="color: #00aeff;">Accessory</span>
+                            <h3 class="game-title">Sega MegaDrive Pad</h3>
+                            <div class="price-row">
+                                <span class="price">€25</span>
+                                <button class="btn-buy-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <span class="footer-logo">GAME OVER</span>
+            <p style="color: #444; margin-top:10px;">© 2025 Secondlife Retrogame</p>
+        </div>
+    </footer>
+
+</body>
+</html>

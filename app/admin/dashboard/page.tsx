@@ -6,7 +6,6 @@ const Dashboard = () => {
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        {/* --- KPI CARDS --- */}
         <DashboardCard title="Incasso totale" icon="euro">
           <p className="text-3xl text-white font-bold mt-6">€ 1.240,00</p>
           <p className="text-sm text-green-500 mt-2">+12% rispetto a ieri</p>
@@ -72,7 +71,6 @@ const Dashboard = () => {
           </DashboardCard>
         </div>
 
-        {/* --- COLONNA LATERALE (1/3): AVVISI MAGAZZINO --- */}
         <DashboardCard title="Avvisi di magazzino" icon="alert-triangle">
           <div className="mt-6 space-y-4">
             
