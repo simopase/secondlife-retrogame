@@ -2,7 +2,7 @@
 
 const Dashboard = () => {
   return <>
-    <p>Admin Dashboardadwawdawd</p>
+    <p>Admin Dashboard</p>
   </>
 }
 export default Dashboard;

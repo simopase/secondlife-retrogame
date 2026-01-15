@@ -10,7 +10,7 @@ export default function DashboardLayout({ children }: DashLayoutProps) {
         <Navbar className="border-b-2 border-neutral-700"></Navbar>
         <div className="flex">
             <Sidebar></Sidebar>
-            <div className="flex-1 ">
+            <div className="flex-1 p-12">
                 {children}
             </div>
         </div>
