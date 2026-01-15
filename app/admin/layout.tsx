@@ -7,7 +7,7 @@ type DashLayoutProps = {
 export default function DashboardLayout({ children }: DashLayoutProps) {
 
     return <div className="bg-dashbg">
-        <Navbar></Navbar>
+        <Navbar className="border-b-2 border-neutral-700"></Navbar>
         <div className="flex">
             <Sidebar></Sidebar>
             <div className="flex-1 ">
