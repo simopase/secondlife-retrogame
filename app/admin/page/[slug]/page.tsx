@@ -1,6 +1,7 @@
 import Accordion from "@/app/components/Accordion"
-import { slides } from "@/app/utils/lib/db";
 import SlideEditor from "@/app/components/SlideEditor"; // <--- 1. Importa il componente client
+import { createClient } from "@/app/utils/supabase/server";
+import { Slide } from 'types/components';
 
 export default async function PageEditor({
   params,
@@ -8,35 +9,37 @@ export default async function PageEditor({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  
-  // Immagina che 'slides' venga caricato qui dal DB in base allo slug
-  const currentSlides = slides; 
+
+  const supabase = await createClient()
+  let currentSlides: Slide[] = [];
+
+  if (slug == "home") {
+    const { data: slides } = await supabase.from("slider").select().order('order', { ascending: true });
+    currentSlides = slides ?? []
+  }
+
+
 
   return (
     <div>
-        <div className="flex justify-between items-center mb-6">
-          <h5 className="text-2xl font-bold tracking-tight text-white leading-8">
-            Modifica: {slug}
-          </h5>
-        </div>
-        
-        <div className="p-6 flex flex-col gap-10 bg-neutral-900/50 rounded-xl">
-          
-          {/* --- ACCORDION 1: EDITOR SLIDER --- */}
-          <Accordion title="Slider Principale" defaultOpen={true}>
-            {/* 2. Passi i dati al componente Client */}
-            <SlideEditor initialSlides={currentSlides}/>
-          </Accordion>
+      <div className="flex justify-between items-center mb-6">
+        <h5 className="text-2xl font-bold tracking-tight text-white leading-8">
+          Modifica: {slug}
+        </h5>
+      </div>
 
-          {/* --- ACCORDION 2: PRODOTTI --- */}
-          <Accordion title="Prodotti in Evidenza">
-            <div className="text-neutral-400">
-              <p className="mb-2">Seleziona i prodotti da mostrare in home:</p>
-              {/* Qui in futuro metterai un altro componente client: <ProductsSelector /> */}
-            </div>
-          </Accordion>
-          
-        </div>
+      <div className="p-6 flex flex-col gap-10 bg-neutral-900/50 rounded-xl">
+
+        <Accordion title="Slider Principale" defaultOpen={true}>
+          <SlideEditor slides={currentSlides} />
+        </Accordion>
+        <Accordion title="Prodotti in Evidenza">
+          <div className="text-neutral-400">
+            <p className="mb-2">Seleziona i prodotti da mostrare in home:</p>
+          </div>
+        </Accordion>
+
+      </div>
     </div>
   )
 }
