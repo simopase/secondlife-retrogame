@@ -10,7 +10,7 @@ type Slide = {
     secondaryWord?: string;
   };
   image: string;
-  bottomText: string;
+  btnText: string;
 }
 
 type SwiperProps = {
@@ -36,7 +36,7 @@ const SwiperComponent = ({ slides }: SwiperProps) => {
                   ))
                 }
               </h1>
-              <Button className="mt-6" size="l" type="primary-glow" onClick={()=> console.log("clicked")}>{slide.bottomText}</Button>
+              <Button className="mt-6" size="l" type="primary-glow" onClick={()=> console.log("clicked")}>{slide.btnText}</Button>
             </div>
 
           </div>
