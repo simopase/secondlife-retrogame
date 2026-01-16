@@ -1,4 +1,4 @@
-import { Card } from '../components/CatalogueComponent';
+import { Card } from '../../components/CatalogueComponent';
 
 export const slides = [
   {
@@ -7,14 +7,14 @@ export const slides = [
       primaryWord: "nuovo",
       secondaryWord: "preferito"
     },
-    image: "slider/slide1.jpg",
+    image: "/slider/slide1.jpg",
     bottomText: "This is slide 1"
   },
   {
     title: {
       text: "Il tuo nuovo vecchio gioco preferito"
     },
-    image: "slider/slide2.jpg",
+    image: "/slider/slide1.jpg",
     bottomText: "This is slide 2"
   },
 ]

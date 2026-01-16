@@ -1,5 +1,6 @@
 import Accordion from "@/app/components/Accordion"
-import Image from "next/image"
+import { slides } from "@/app/utils/lib/db";
+import SlideEditor from "@/app/components/SlideEditor"; // <--- 1. Importa il componente client
 
 export default async function PageEditor({
   params,
@@ -7,35 +8,35 @@ export default async function PageEditor({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  return <div>
-    <div className="flex justify-between items-center mb-6">
-      <h5 className="text-2xl font-bold tracking-tight text-white leading-8">
-        Modifica: {slug}
-      </h5>
-    </div>
-    <div className="shadow-lg shadow-amber-300 p-6 flex flex-col gap-10">
-      <Accordion title="Slider Principale">
-        <div className="flex flex-col gap-8">
-          <div className="rounded-lg border border-neutral-700 p-6">
-            <Image src="/slider/slide1.jpg" width={50} height={50} alt="img_alt"></Image>
-          </div>
-          <div className="rounded-lg border border-neutral-700 p-6">
-            <Image src="/slider/slide1.jpg" width={50} height={50} alt="img_alt"></Image>
-          </div>
-          <div className="rounded-lg border border-neutral-700 p-6">
-            <Image src="/slider/slide1.jpg" width={50} height={50} alt="img_alt"></Image>
-          </div>
+  
+  // Immagina che 'slides' venga caricato qui dal DB in base allo slug
+  const currentSlides = slides; 
+
+  return (
+    <div>
+        <div className="flex justify-between items-center mb-6">
+          <h5 className="text-2xl font-bold tracking-tight text-white leading-8">
+            Modifica: {slug}
+          </h5>
         </div>
+        
+        <div className="p-6 flex flex-col gap-10 bg-neutral-900/50 rounded-xl">
+          
+          {/* --- ACCORDION 1: EDITOR SLIDER --- */}
+          <Accordion title="Slider Principale" defaultOpen={true}>
+            {/* 2. Passi i dati al componente Client */}
+            <SlideEditor initialSlides={currentSlides}/>
+          </Accordion>
 
-      </Accordion>
-
-      {/* --- ACCORDION 2: PRODOTTI --- */}
-      <Accordion title="Prodotti in Evidenza">
-        <div className="text-neutral-400">
-          <p className="mb-2">Seleziona i prodotti da mostrare in home:</p>
-
+          {/* --- ACCORDION 2: PRODOTTI --- */}
+          <Accordion title="Prodotti in Evidenza">
+            <div className="text-neutral-400">
+              <p className="mb-2">Seleziona i prodotti da mostrare in home:</p>
+              {/* Qui in futuro metterai un altro componente client: <ProductsSelector /> */}
+            </div>
+          </Accordion>
+          
         </div>
-      </Accordion>
     </div>
-  </div>
+  )
 }

@@ -6,7 +6,8 @@
   --sidebar-text: #898989;
   --primary-red: #E60000;
   --primary-yellow: #FFD700;
-  --cta-shadow: 0 0 15px rgba(230, 0, 0, 0.6)
+  --cta-shadow: 0 0 15px rgba(230, 0, 0, 0.6);
+  --glow-gold: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.5)
 
 
 }
@@ -17,7 +18,6 @@
   --color-sidebar: var(--sidebar-text);
   --color-primary-red: var(--primary-red);
   --color-primary-yellow: var(--primary-yellow);
-  --cta-shadow: var(--cta-shadow);
 }
 
 @media (prefers-color-scheme: dark) {

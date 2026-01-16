@@ -32,7 +32,7 @@ const SwiperComponent = ({ slides }: SwiperProps) => {
               <h1 className='max-w-[50%]'>
                 {
                   slide.title.text?.split(' ').map((word, idx) => (
-                    <span key={idx} className={word === slide.title.primaryWord ? 'text-primary-red' : word === slide.title.secondaryWord ? 'text-primary-yellow' : ''}>{word} </span>
+                    <span key={idx} className={word === slide.title.primaryWord ? 'text-primary-red' : word === slide.title.secondaryWord ? 'text-primary-yellow text-shadow-(--glow-gold)' : ''}>{word} </span>
                   ))
                 }
               </h1>

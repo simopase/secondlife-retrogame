@@ -2,7 +2,7 @@ import Navbar from "./components/Navbar";
 import { ShoppingCart, User } from 'lucide-react';
 import SwiperComponent from "./components/SwiperComponent";
 import CatalogueComponent from "./components/CatalogueComponent";
-import { slides, catalogue } from "./lib/db";
+import { slides, catalogue } from "./utils/lib/db";
 import Footer from "./components/Footer";
 
 
