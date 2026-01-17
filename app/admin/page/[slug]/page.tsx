@@ -1,5 +1,5 @@
 import Accordion from "@/app/components/Accordion"
-import SlideEditor from "@/app/components/SlideEditor"; // <--- 1. Importa il componente client
+import SlideEditor from "@/app/components/SlideEditor";
 import { createClient } from "@/app/utils/supabase/server";
 import { Slide } from 'types/components';
 

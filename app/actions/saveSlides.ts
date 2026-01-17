@@ -3,6 +3,7 @@
 import { createClient } from '../utils/supabase/server';
 import { v4 as uuidv4 } from 'uuid';
 import { revalidatePath } from 'next/cache';
+import { SwiperProps, Slide } from 'types/components';
 
 // Helper per trasformare la stringa Base64 in un file binario (Buffer)
 const decodeBase64 = (dataString: string) => {
@@ -19,7 +20,7 @@ const decodeBase64 = (dataString: string) => {
   };
 };
 
-export async function saveSlidesToDb(data: { slides: any[] }) {
+export async function saveSlidesToDb({ slides }: SwiperProps) {
   const supabase = await createClient();
 
   console.log("🚀 Inizio processo di salvataggio server...");
@@ -27,7 +28,7 @@ export async function saveSlidesToDb(data: { slides: any[] }) {
   try {
     // 1. ELABORIAMO LE SLIDE (Upload immagini)
     // Usiamo Promise.all per processarle tutte in parallelo (più veloce)
-    const processedSlides = await Promise.all(data.slides.map(async (slide, index) => {
+    const processedSlides = await Promise.all(slides.map(async (slide, index) => {
       
       let finalImageUrl = slide.image; // Di base teniamo quello che c'è (URL o Base64)
 

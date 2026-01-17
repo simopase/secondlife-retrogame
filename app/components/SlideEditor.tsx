@@ -16,7 +16,8 @@ const slideSchema = z.object({
         primaryWord: z.string().optional(),
         secondaryWord: z.string().optional(),
         btnText: z.string().min(1, "Testo bottone obbligatorio"),
-        image: z.string().optional()
+        image: z.string().optional(),
+        order: z.number().optional()
     }))
 });
 
@@ -34,7 +35,8 @@ export default function SlideEditor({ slides }: SwiperProps) {
                 secondaryWord: s.title.secondaryWord || "",
                 btnText: s.btnText,
                 btnLink: "#",
-                image: s.image
+                image: s.image,
+                order: s.order || 0
             }))
         }
     });
@@ -105,6 +107,7 @@ export default function SlideEditor({ slides }: SwiperProps) {
                 },
                 image: s.image || "", // Passiamo il Base64 (nuovo) o l'URL (vecchio)
                 btnText: s.btnText,
+                order: s.order || 0
             }))
         };
 
